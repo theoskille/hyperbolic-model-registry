@@ -21,21 +21,28 @@ export function ModelList({ models }: ModelListProps) {
         </div>
       </div>
       <div className="mt-4 flex-1">
-        <div className="h-full border-2 border-foreground">
-          <table className="min-w-full">
-            <thead>
-              <tr className="border-b-2 border-foreground">
-                <th className="py-3.5 pl-6 pr-3 text-left text-sm font-semibold text-foreground border-r-2 border-foreground">Name</th>
-                <th className="px-3 py-3.5 text-left text-sm font-semibold text-foreground border-r-2 border-foreground">Version</th>
-                <th className="px-3 py-3.5 text-left text-sm font-semibold text-foreground">Framework</th>
-              </tr>
-            </thead>
-            <tbody>
-              {models.map((model, index) => (
-                <ModelCard key={model.id} model={model} index={index} />
-              ))}
-            </tbody>
-          </table>
+        <div className="h-[calc(100vh-18rem)] border-2 border-foreground">
+          <div className="overflow-hidden">
+            <table className="min-w-full">
+              <thead>
+                <tr className="border-b-2 border-foreground">
+                  <th className="w-[30%] py-3.5 pl-6 pr-3 text-left text-sm font-semibold text-foreground border-r-2 border-foreground">Name</th>
+                  <th className="w-[30%] px-3 py-3.5 text-left text-sm font-semibold text-foreground border-r-2 border-foreground">Version</th>
+                  <th className="w-[30%] px-3 py-3.5 text-left text-sm font-semibold text-foreground">Framework</th>
+                  <th className="w-[10%]"></th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+          <div className="overflow-y-auto h-[calc(100%-3.5rem)]">
+            <table className="min-w-full">
+              <tbody>
+                {models.map((model, index) => (
+                  <ModelCard key={model.id} model={model} index={index} />
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>

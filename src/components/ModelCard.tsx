@@ -28,16 +28,16 @@ export function ModelCard({ model, index }: ModelCardProps) {
   return (
     <>
       <tr className={`hover:bg-foreground/5 group ${index % 2 === 0 ? 'bg-foreground/2' : ''}`}>
-        <td className="whitespace-nowrap py-4 pl-6 pr-3 text-sm text-foreground group-hover:text-accent dashed-border border-r-0 border-b-0 border-t-0">
+        <td className="w-[30%] whitespace-nowrap py-4 pl-6 pr-3 text-sm text-foreground group-hover:text-accent dashed-border border-r-0 border-b-0 border-t-0">
           {model.name}
         </td>
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-foreground/70 group-hover:text-accent dashed-border border-r-0 border-b-0 border-t-0">
+        <td className="w-[30%] whitespace-nowrap px-3 py-4 text-sm text-foreground/70 group-hover:text-accent dashed-border border-r-0 border-b-0 border-t-0">
           {model.version}
         </td>
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-foreground/70 group-hover:text-accent">
+        <td className="w-[30%] whitespace-nowrap px-3 py-4 text-sm text-foreground/70 group-hover:text-accent">
           {model.framework}
         </td>
-        <td className="relative whitespace-nowrap py-4 pl-3 pr-6 text-right text-sm font-medium">
+        <td className="w-[10%] relative whitespace-nowrap py-4 pl-3 pr-6 text-right text-sm font-medium">
           <DropdownMenu
             trigger={<span>•••</span>}
             items={[
