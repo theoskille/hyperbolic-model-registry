@@ -8,9 +8,10 @@ import { deleteModel } from '@/app/actions';
 
 interface ModelCardProps {
   model: Model;
+  index: number;
 }
 
-export function ModelCard({ model }: ModelCardProps) {
+export function ModelCard({ model, index }: ModelCardProps) {
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
 
   const handleDelete = async () => {
@@ -26,11 +27,11 @@ export function ModelCard({ model }: ModelCardProps) {
 
   return (
     <>
-      <tr className="border-b-2 dashed-border border-foreground last:border-b-0 hover:bg-foreground/5 group">
-        <td className="whitespace-nowrap py-4 pl-6 pr-3 text-sm text-foreground border-r-2 dashed-border border-foreground group-hover:text-accent">
+      <tr className={`hover:bg-foreground/5 group ${index % 2 === 0 ? 'bg-foreground/2' : ''}`}>
+        <td className="whitespace-nowrap py-4 pl-6 pr-3 text-sm text-foreground group-hover:text-accent dashed-border border-r-0 border-b-0 border-t-0">
           {model.name}
         </td>
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-foreground/70 border-r-2 dashed-border border-foreground group-hover:text-accent">
+        <td className="whitespace-nowrap px-3 py-4 text-sm text-foreground/70 group-hover:text-accent dashed-border border-r-0 border-b-0 border-t-0">
           {model.version}
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-foreground/70 group-hover:text-accent">

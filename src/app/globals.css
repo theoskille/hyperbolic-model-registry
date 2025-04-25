@@ -32,15 +32,9 @@ body {
 }
 
 .dashed-border {
-  border-style: dashed;
-  border-width: 1px;
-  border-image: repeating-linear-gradient(
-    to right,
-    var(--foreground) 0,
-    var(--foreground) 4px,
-    transparent 4px,
-    transparent 8px
-  ) 1;
+  border-right-style: dashed;
+  border-right-width: 1px;
+  border-right-color: var(--foreground);
 }
 
 .terminal-button {
