@@ -31,9 +31,9 @@ export function CreateModelForm() {
       {isOpen && (
         <div className="fixed inset-0 z-10 overflow-y-auto">
           <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-            <div className="fixed inset-0 bg-foreground/75 transition-opacity" onClick={() => setIsOpen(false)} />
+            <div className="fixed inset-0 bg-black/50 transition-opacity" onClick={() => setIsOpen(false)} />
             
-            <div className="relative transform overflow-hidden rounded-lg bg-background px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6">
+            <div className="relative transform overflow-hidden border-2 border-foreground bg-background px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6">
               <div className="absolute right-0 top-0 hidden pr-4 pt-4 sm:block">
                 <button
                   type="button"
@@ -62,7 +62,7 @@ export function CreateModelForm() {
                           name="name"
                           id="name"
                           required
-                          className="mt-1 block w-full rounded-md border-foreground/20 bg-background text-foreground shadow-sm focus:border-foreground/50 focus:ring-foreground/50 sm:text-sm"
+                          className="mt-1 block w-full border-2 border-foreground bg-background text-foreground shadow-sm focus:border-accent focus:outline-none sm:text-sm"
                           placeholder="Enter model name"
                         />
                       </div>
@@ -75,7 +75,7 @@ export function CreateModelForm() {
                           name="version"
                           id="version"
                           required
-                          className="mt-1 block w-full rounded-md border-foreground/20 bg-background text-foreground shadow-sm focus:border-foreground/50 focus:ring-foreground/50 sm:text-sm"
+                          className="mt-1 block w-full border-2 border-foreground bg-background text-foreground shadow-sm focus:border-accent focus:outline-none sm:text-sm"
                           placeholder="Enter version"
                         />
                       </div>
@@ -87,7 +87,7 @@ export function CreateModelForm() {
                           id="framework"
                           name="framework"
                           required
-                          className="mt-1 block w-full rounded-md border-foreground/20 bg-background text-foreground shadow-sm focus:border-foreground/50 focus:ring-foreground/50 sm:text-sm"
+                          className="mt-1 block w-full border-2 border-foreground bg-background text-foreground shadow-sm focus:border-accent focus:outline-none sm:text-sm"
                         >
                           <option value="">Select a framework</option>
                           <option value="PyTorch">PyTorch</option>
@@ -99,13 +99,13 @@ export function CreateModelForm() {
                       <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
                         <button
                           type="submit"
-                          className="inline-flex w-full justify-center rounded-md bg-foreground/10 px-3 py-2 text-sm font-semibold text-foreground shadow-sm hover:bg-foreground/20 sm:ml-3 sm:w-auto"
+                          className="terminal-button"
                         >
                           Register
                         </button>
                         <button
                           type="button"
-                          className="mt-3 inline-flex w-full justify-center rounded-md bg-background px-3 py-2 text-sm font-semibold text-foreground shadow-sm ring-1 ring-inset ring-foreground/20 hover:bg-foreground/5 sm:mt-0 sm:w-auto"
+                          className="terminal-button mt-3 sm:mt-0 sm:ml-3"
                           onClick={() => setIsOpen(false)}
                         >
                           Cancel

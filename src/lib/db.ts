@@ -33,6 +33,10 @@ export const dbOperations = {
     ).run(id, data.name, data.version, data.framework);
     return { id, ...data };
   },
+
+  deleteModel: (id: string): void => {
+    db.prepare('DELETE FROM models WHERE id = ?').run(id);
+  },
 };
 
 export default db; 

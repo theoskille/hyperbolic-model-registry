@@ -4,12 +4,14 @@
   --background: #ffffff;
   --foreground: #171717;
   --accent: #00ff00;
+  --danger: #ff0000;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-accent: var(--accent);
+  --color-danger: var(--danger);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -19,6 +21,7 @@
     --background: #0a0a0a;
     --foreground: #ededed;
     --accent: #00ff00;
+    --danger: #ff0000;
   }
 }
 
@@ -41,7 +44,8 @@ body {
 }
 
 .terminal-button {
-  padding: 0.5rem 1rem;
+  padding: 0.25rem 0.75rem;
+  margin: 0 0.25rem;
   border: 1px solid var(--foreground);
   background-color: var(--background);
   color: var(--foreground);
@@ -51,4 +55,15 @@ body {
 .terminal-button:hover {
   border-color: var(--accent);
   color: var(--accent);
+}
+
+.danger-button {
+  color: var(--danger);
+  border-color: var(--danger);
+}
+
+.danger-button:hover {
+  color: var(--danger);
+  border-color: var(--danger);
+  opacity: 0.8;
 }
