@@ -11,7 +11,7 @@ export async function createModel(data: CreateModelData): Promise<Model> {
     revalidatePath('/');
     return model;
   } catch (error) {
-    throw new Error('Failed to create model');
+    throw new Error(`Failed to create model: ${error}`);
   }
 }
 
@@ -21,7 +21,7 @@ export async function getModels(): Promise<Model[]> {
     const models = dbOperations.getAllModels();
     return models;
   } catch (error) {
-    throw new Error('Failed to fetch models');
+    throw new Error(`Failed to fetch models: ${error}`);
   }
 }
 
@@ -31,6 +31,6 @@ export async function deleteModel(id: string): Promise<void> {
     dbOperations.deleteModel(id);
     revalidateTag('models');
   } catch (error) {
-    throw new Error('Failed to delete model');
+    throw new Error(`Failed to delete model: ${error}`);
   }
 } 
