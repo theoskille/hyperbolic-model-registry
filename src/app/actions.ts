@@ -2,7 +2,7 @@
 
 import { dbOperations } from '@/lib/db';
 import { CreateModelData, Model } from '@/types/models';
-import { revalidatePath } from 'next/cache';
+import { revalidatePath, revalidateTag } from 'next/cache';
 
 export async function createModel(data: CreateModelData): Promise<Model> {
   console.log('createModel called');
@@ -18,7 +18,8 @@ export async function createModel(data: CreateModelData): Promise<Model> {
 export async function getModels(): Promise<Model[]> {
   console.log('getModels called');
   try {
-    return dbOperations.getAllModels();
+    const models = dbOperations.getAllModels();
+    return models;
   } catch (error) {
     throw new Error('Failed to fetch models');
   }
@@ -28,7 +29,7 @@ export async function deleteModel(id: string): Promise<void> {
   console.log('deleteModel called');
   try {
     dbOperations.deleteModel(id);
-    revalidatePath('/');
+    revalidateTag('models');
   } catch (error) {
     throw new Error('Failed to delete model');
   }
