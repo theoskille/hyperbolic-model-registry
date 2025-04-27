@@ -1,5 +1,21 @@
 # Model Registry Lite
 
+## Deployed site here: https://hyperbolic-model-registry-production.up.railway.app/
+
+## Run locally
+
+1. Install dependencies:
+```bash
+npm install
+```
+
+2. Run the development server:
+```bash
+npm run dev
+```
+
+3. Open [http://localhost:3000](http://localhost:3000) in your browser
+
 ## Technical Decisions
 
 ### Architecture Evolution
@@ -44,19 +60,6 @@ However, I transitioned to a client-side API approach because:
 - Framework filtering
 - Optimistic UI updates for better user experience
 
-## Getting Started
-
-1. Install dependencies:
-```bash
-npm install
-```
-
-2. Run the development server:
-```bash
-npm run dev
-```
-
-3. Open [http://localhost:3000](http://localhost:3000) in your browser
 
 ## Future Improvements
 
@@ -64,7 +67,6 @@ npm run dev
 - Add authentication
 - Enhance error handling
 
-## Deployed site here: https://hyperbolic-model-registry-production.up.railway.app/
 
 
 
