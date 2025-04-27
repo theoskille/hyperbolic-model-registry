@@ -69,6 +69,8 @@ Chose SQLite3 (via better-sqlite3) because it's:
 
 Perfect for this use case - runs on the same machine as the backend with persistent storage and no external dependencies.
 
+NOTE: I originally wanted to deploy on Vercel, but Vercel is strictly serverless, which does not support sqlite. Hence my deployment decision.
+
 ### UI/UX Choices
 
 - Terminal-inspired design for that dev-friendly feel
