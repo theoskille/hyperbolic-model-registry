@@ -2,27 +2,16 @@
 
 import { useState } from 'react';
 import { Framework } from '@/types/models';
+import { useModels } from '@/hooks/useModels';
 
 export function CreateModelForm() {
   const [isOpen, setIsOpen] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const { registerModel, isLoading, error } = useModels();
 
   const handleSubmit = async (formData: FormData) => {
-    try {
-      const data = Object.fromEntries(formData) as { name: string; version: string; framework: Framework };
-      const res = await fetch('/api/models', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-      setError(null);
-      setIsOpen(false);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'An error occurred');
-      console.error(err);
-    }
+    const data = Object.fromEntries(formData) as { name: string; version: string; framework: Framework };
+    await registerModel(data);
+    setIsOpen(false);
   };
 
   return (
@@ -106,13 +95,15 @@ export function CreateModelForm() {
                         <button
                           type="submit"
                           className="terminal-button"
+                          disabled={isLoading}
                         >
-                          Register
+                          {isLoading ? 'Registering...' : 'Register'}
                         </button>
                         <button
                           type="button"
                           className="terminal-button mt-3 sm:mt-0 sm:ml-3"
                           onClick={() => setIsOpen(false)}
+                          disabled={isLoading}
                         >
                           Cancel
                         </button>

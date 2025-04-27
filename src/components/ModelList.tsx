@@ -3,26 +3,32 @@
 import { Model } from '@/types/models';
 import { ModelCard } from './ModelCard';
 import { CreateModelForm } from './CreateModelForm';
-import { useState, useEffect, useContext, createContext } from 'react';
+import { FrameworkFilter } from './FrameworkFilter';
+import { useEffect } from 'react';
+import { useModels } from '@/hooks/useModels';
 
 export function ModelList() {
-  const [models, setModels] = useState<Model[]>([]);
+  const { filteredModels, fetchModels, isLoading, error } = useModels();
   
   useEffect(() => {
-    const fetchModels = async () => {
-      try {
-        const res = await fetch('/api/models');
-        if(!res.ok) {
-          throw new Error('Failed to fetch models');
-        }
-        const data = await res.json();
-        setModels(data);
-      } catch (error) {
-        console.error(error);
-      }
-    }
     fetchModels();
   }, []);
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-[calc(100vh-16rem)]">
+        <div className="text-foreground">Loading models...</div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex items-center justify-center h-[calc(100vh-16rem)]">
+        <div className="text-red-500">Error: {error}</div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col h-[calc(100vh-16rem)]">
@@ -33,7 +39,8 @@ export function ModelList() {
             A list of all models in the registry.
           </p>
         </div>
-        <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
+        <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none flex gap-4">
+          <FrameworkFilter />
           <CreateModelForm />
         </div>
       </div>
@@ -54,7 +61,7 @@ export function ModelList() {
           <div className="overflow-y-auto h-[calc(100%-3.5rem)]">
             <table className="min-w-full">
               <tbody>
-                {models.map((model, index) => (
+                {filteredModels.map((model, index) => (
                   <ModelCard key={model.id} model={model} index={index} />
                 ))}
               </tbody>

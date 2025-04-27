@@ -4,6 +4,7 @@ import { Model } from '@/types/models';
 import { useState } from 'react';
 import { ConfirmationModal } from './ConfirmationModal';
 import { DropdownMenu } from './DropdownMenu';
+import { useModels } from '@/hooks/useModels';
 
 interface ModelCardProps {
   model: Model;
@@ -12,22 +13,11 @@ interface ModelCardProps {
 
 export function ModelCard({ model, index }: ModelCardProps) {
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const { deleteModel, isLoading, error } = useModels();
 
   const handleDelete = async () => {
-    try {
-      const res = await fetch(`/api/models?id=${model.id}`, {
-        method: 'DELETE',
-      });
-      if(!res.ok) {
-        throw new Error('Failed to delete model');
-      }
-      setIsConfirmOpen(false);
-      setError(null);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'An error occurred');
-      console.error(err);
-    }
+    await deleteModel(model.id);
+    setIsConfirmOpen(false);
   };
 
   return (
@@ -67,8 +57,9 @@ export function ModelCard({ model, index }: ModelCardProps) {
           { label: 'Version', value: model.version },
           { label: 'Framework', value: model.framework },
         ]}
-        confirmText="Delete"
+        confirmText={isLoading ? "Deleting..." : "Delete"}
         cancelText="Cancel"
+        isConfirmDisabled={isLoading}
       />
 
       {error && (

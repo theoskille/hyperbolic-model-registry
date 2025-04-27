@@ -14,6 +14,7 @@ interface ConfirmationModalProps {
   }[];
   confirmText?: string;
   cancelText?: string;
+  isConfirmDisabled?: boolean;
 }
 
 export function ConfirmationModal({
@@ -25,6 +26,7 @@ export function ConfirmationModal({
   details,
   confirmText = 'Delete',
   cancelText = 'Cancel',
+  isConfirmDisabled = false,
 }: ConfirmationModalProps) {
   if (!isOpen) return null;
 
@@ -44,10 +46,18 @@ export function ConfirmationModal({
           </div>
         </div>
         <div className="mt-6 flex justify-end space-x-3">
-          <button onClick={onClose} className="terminal-button">
+          <button
+            onClick={onClose}
+            className="terminal-button"
+            disabled={isConfirmDisabled}
+          >
             {cancelText}
           </button>
-          <button onClick={onConfirm} className="danger-button">
+          <button
+            onClick={onConfirm}
+            className="danger-button"
+            disabled={isConfirmDisabled}
+          >
             {confirmText}
           </button>
         </div>

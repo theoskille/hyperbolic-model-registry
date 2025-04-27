@@ -6,12 +6,20 @@ export function Footer() {
           <div className="text-sm text-foreground/70">
             © {new Date().getFullYear()} Model Registry
           </div>
-          <div className="text-sm text-foreground/70">
+          <div className="flex items-center space-x-4">
             <a 
-              href="https://github.com/yourusername/model-registry" 
+              href="https://www.linkedin.com/in/theo-skille-2b1741180/" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="hover:text-accent"
+              className="text-sm text-foreground/70 hover:text-accent transition-colors"
+            >
+              LinkedIn
+            </a>
+            <a 
+              href="https://github.com/theoskille" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-sm text-foreground/70 hover:text-accent transition-colors"
             >
               GitHub
             </a>
