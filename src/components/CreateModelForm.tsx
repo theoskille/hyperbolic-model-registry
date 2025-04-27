@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { createModel } from '@/app/actions';
 import { Framework } from '@/types/models';
 
 export function CreateModelForm() {
@@ -11,11 +10,18 @@ export function CreateModelForm() {
   const handleSubmit = async (formData: FormData) => {
     try {
       const data = Object.fromEntries(formData) as { name: string; version: string; framework: Framework };
-      await createModel(data);
+      const res = await fetch('/api/models', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
       setError(null);
       setIsOpen(false);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
+      console.error(err);
     }
   };
 

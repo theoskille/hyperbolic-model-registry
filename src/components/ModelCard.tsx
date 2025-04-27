@@ -4,7 +4,6 @@ import { Model } from '@/types/models';
 import { useState } from 'react';
 import { ConfirmationModal } from './ConfirmationModal';
 import { DropdownMenu } from './DropdownMenu';
-import { deleteModel } from '@/app/actions';
 
 interface ModelCardProps {
   model: Model;
@@ -13,15 +12,21 @@ interface ModelCardProps {
 
 export function ModelCard({ model, index }: ModelCardProps) {
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleDelete = async () => {
-    console.log('handle delete called');
     try {
-      await deleteModel(model.id);
+      const res = await fetch(`/api/models?id=${model.id}`, {
+        method: 'DELETE',
+      });
+      if(!res.ok) {
+        throw new Error('Failed to delete model');
+      }
       setIsConfirmOpen(false);
-    } catch (error) {
-      console.error('Failed to delete model:', error);
-      // TODO: Add error handling UI
+      setError(null);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'An error occurred');
+      console.error(err);
     }
   };
 
@@ -62,7 +67,15 @@ export function ModelCard({ model, index }: ModelCardProps) {
           { label: 'Version', value: model.version },
           { label: 'Framework', value: model.framework },
         ]}
+        confirmText="Delete"
+        cancelText="Cancel"
       />
+
+      {error && (
+        <div className="text-red-500 text-sm mt-2">
+          {error}
+        </div>
+      )}
     </>
   );
 } 

@@ -1,18 +1,8 @@
-import { getModels } from '@/app/actions';
 import { ModelList } from '@/components/ModelList';
 import { Footer } from '@/components/Footer';
 import Image from 'next/image';
-import { unstable_cache } from 'next/cache';
-
-const getCachedModels = unstable_cache(
-  async () => getModels(),
-  ['models'],
-  { tags: ['models'] }
-);
 
 export default async function Home() {
-  const models = await getCachedModels();
-  
   return (
     <div className="flex min-h-screen flex-col">
       <div className="flex-1">
@@ -28,7 +18,8 @@ export default async function Home() {
             />
             <h1 className="text-x1 font-medium text-accent ml-2 mb-2">Model Registry</h1>
           </div>
-          <ModelList models={models} />
+          
+          <ModelList />
         </div>
       </div>
       <Footer />

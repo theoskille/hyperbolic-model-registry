@@ -1,12 +1,29 @@
+'use client'
+
 import { Model } from '@/types/models';
 import { ModelCard } from './ModelCard';
 import { CreateModelForm } from './CreateModelForm';
+import { useState, useEffect, useContext, createContext } from 'react';
 
-interface ModelListProps {
-  models: Model[];
-}
+export function ModelList() {
+  const [models, setModels] = useState<Model[]>([]);
+  
+  useEffect(() => {
+    const fetchModels = async () => {
+      try {
+        const res = await fetch('/api/models');
+        if(!res.ok) {
+          throw new Error('Failed to fetch models');
+        }
+        const data = await res.json();
+        setModels(data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchModels();
+  }, []);
 
-export function ModelList({ models }: ModelListProps) {
   return (
     <div className="flex flex-col h-[calc(100vh-16rem)]">
       <div className="sm:flex sm:items-center sm:justify-between">
