@@ -4,22 +4,25 @@
 
 ### Architecture Evolution
 
+My goal was to write the most idiomatic next.js code I could.
+
 Initially implemented using Next.js Server Actions, which offered:
-- Single round-trip data fetching and UI updates
+- Single round-trip data fetching and UI updates (super cool in my opinion)
 - Simplified state management
 - Built-in form handling
+- Exclusive Server Side Rendering (SSR)
 
 However, I transitioned to a client-side API approach because:
 - Server Actions are limited to Next.js applications
-- Other systems might need to interact with the model registry
-- API endpoints provide better interoperability
+- Other systems might need to interact with the model registry. Seems likely we would need this information elsewhere so having it exposed via a traditional api is useful.
+- API endpoints provide better interoperability and support (tooling, automatic browser caching etc.)
 
 ### Data Fetching Strategy
 
 - Implemented custom data fetching using native `fetch` and React hooks
 - Single data fetching point to avoid waterfall effects
-- Simple in-memory storage for demonstration purposes
-- Easy to extend with persistent storage if needed
+- my custom useModels hook allows me to seperate concerns. The hook lets me move data fetching and state management logic out of the components and let them focus on just the view. 
+- I decided to keep data fetching and state management together in the same file because in this case, they are tightly coupled so keeping them together kept it clean and simple.
 
 ### Database Implementation
 
@@ -32,8 +35,6 @@ However, I transitioned to a client-side API approach because:
 - Perfect for this use case as it:
   - Runs on the same device as the backend
   - Provides persistent storage without external dependencies
-  - Handles concurrent access efficiently
-  - Scales well for the expected data volume
 
 ### UI/UX Considerations
 
@@ -63,23 +64,8 @@ npm run dev
 - Add authentication
 - Enhance error handling
 
-## Deployed site here: 
+## Deployed site here: https://hyperbolic-model-registry-production.up.railway.app/
 
-## Run Locally
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 
 
