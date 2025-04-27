@@ -1,74 +1,85 @@
 # Model Registry Lite
 
-## Deployed site here: https://hyperbolic-model-registry-production.up.railway.app/
+A lightweight, terminal-inspired registry for tracking machine learning models.
 
-## Run locally
+**Live Demo:** [https://hyperbolic-model-registry-production.up.railway.app/](https://hyperbolic-model-registry-production.up.railway.app/)
 
-1. Install dependencies:
+## Quick Start
+
 ```bash
+# Install dependencies
 npm install
-```
 
-2. Run the development server:
-```bash
+# Fire up the dev server
 npm run dev
+
+# Point your browser to
+http://localhost:3000
 ```
 
-3. Open [http://localhost:3000](http://localhost:3000) in your browser
+## Technical Journey
 
-## Technical Decisions
+### API Evolution
 
-### Architecture Evolution
+My goal was to write the most idiomatic Next.js code I could.
 
-My goal was to write the most idiomatic next.js code I could.
+The big decision I had to make was whether to use Next.js Server Actions OR Traditional Client-Side data fetching.
 
-Initially implemented using Next.js Server Actions, which offered:
+### Server Actions vs. Client-Side Fetching
+
+This decision involved several tradeoffs:
+
+**Server Actions advantages:**
 - Single round-trip data fetching and UI updates (super cool in my opinion)
-- Simplified state management
-- Built-in form handling
-- Exclusive Server Side Rendering (SSR)
+- Simplified state management with less boilerplate
+- Built-in form handling that just works
+- Exclusive Server Side Rendering (SSR) for better SEO and initial load performance
 
-However, I transitioned to a client-side API approach because:
-- Server Actions are limited to Next.js applications
-- Other systems might need to interact with the model registry. Seems likely we would need this information elsewhere so having it exposed via a traditional api is useful.
-- API endpoints provide better interoperability and support (tooling, automatic browser caching etc.)
+**Client-side data fetching advantages:**
+- More universal approach that works beyond Next.js
+- Better tooling support and ecosystem compatibility
+- Familiar patterns for most developers
+- More explicit separation of concerns
 
-### Data Fetching Strategy
 
-- Implemented custom data fetching using native `fetch` and React hooks
-- Single data fetching point to avoid waterfall effects
-- my custom useModels hook allows me to seperate concerns. The hook lets me move data fetching and state management logic out of the components and let them focus on just the view. 
-- I decided to keep data fetching and state management together in the same file because in this case, they are tightly coupled so keeping them together kept it clean and simple.
+Started with Next.js Server Actions for their elegant one-round-trip data updates, but pivoted to a client-side data fetching approach for several reasons:
 
-### Database Implementation
+- **Interoperability:** Standard APIs can talk to anything, not just Next.js apps
+- **Ecosystem Support:** Better tooling, automatic browser caching, etc.
+- **Future-proofing:** Other systems might need to interact with the model registry. Seems likely we would need this information elsewhere so having it exposed via a traditional API is useful
+- **Doc Requirments Wording** in the requirments for this project, the wording implied that I should use client side fetching.
 
-- Chose SQLite3 (better-sqlite3) for its:
-  - Lightweight and embedded nature
-  - Synchronous operations (avoiding promise overhead)
-  - Zero-configuration setup
-  - Single-file storage
-  - ACID compliance
-- Perfect for this use case as it:
-  - Runs on the same device as the backend
-  - Provides persistent storage without external dependencies
+### Data Strategy
 
-### UI/UX Considerations
+Built a tight but flexible data layer:
 
-- terminal-inspired design
+- Custom `useModels` hook separates concerns nicely
+- Single data fetching point prevents waterfalls
+- Kept data fetching + state management bundled together (they're tightly coupled here)
+
+### Why SQLite3?
+
+Chose SQLite3 (via better-sqlite3) because it's:
+
+- Embedded and lightweight
+- Synchronous (no promise overhead)
+- Zero-config
+- Single-file storage
+- ACID compliant
+
+Perfect for this use case - runs on the same machine as the backend with persistent storage and no external dependencies.
+
+### UI/UX Choices
+
+- Terminal-inspired design for that dev-friendly feel
 - Responsive layout
 - Form validation
 - Framework filtering
-- Optimistic UI updates for better user experience
+- Optimistic UI updates for snappy interactions
 
+## Future considerations
 
-## Future Improvements
-
-- Implement model editing
-- Add authentication
-- Enhance error handling
-
-
-
-
-
-
+- Model editing functionality
+- Authentication layer
+- More robust error handling
+- Pagination/infinite scroll for when the registry gets huge
