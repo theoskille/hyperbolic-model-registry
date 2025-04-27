@@ -17,7 +17,7 @@ npm run dev
 http://localhost:3000
 ```
 
-## Technical Journey
+## Technical Discussion
 
 ### API Evolution
 
