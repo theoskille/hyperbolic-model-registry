@@ -1,6 +1,5 @@
 'use client'
 
-import { Model } from '@/types/models';
 import { ModelCard } from './ModelCard';
 import { CreateModelForm } from './CreateModelForm';
 import { FrameworkFilter } from './FrameworkFilter';

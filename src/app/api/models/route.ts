@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { dbOperations } from '@/lib/db';
-import { CreateModelData, Model } from '@/types/models';
+import { CreateModelData } from '@/types/models';
 
 
 export async function GET() {
@@ -9,7 +9,7 @@ export async function GET() {
     return NextResponse.json(models);
   } catch (error) {
     return NextResponse.json(
-      { error: 'Failed to fetch models' },
+      { error: `Failed to fetch models: ${error}` },
       { status: 500 }
     );
   }
@@ -22,7 +22,7 @@ export async function POST(request: Request) {
     return NextResponse.json(model, { status: 201 });
   } catch (error) {
     return NextResponse.json(
-      { error: 'Failed to create model' },
+      { error: `Failed to create model: ${error}` },
       { status: 500 }
     );
   }
@@ -42,7 +42,7 @@ export async function DELETE(request: Request) {
     return new NextResponse(null, { status: 204 });
   } catch (error) {
     return NextResponse.json(
-      { error: 'Failed to delete model' },
+      { error: `Failed to delete model: ${error}` },
       { status: 500 }
     );
   }
