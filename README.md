@@ -57,6 +57,13 @@ Built a tight but flexible data layer:
 - Single data fetching point prevents waterfalls
 - Kept data fetching + state management bundled together (they're tightly coupled here)
 
+I really like that pattern I used for creating the useModels hook. It's modular, extensible, and creates a singular source of truth for state.
+Components can hook into whatever resources they need. 
+
+I'd like to highlight `useModels.tsx` file for my approach to resuable component logic and data fetching.
+
+NOTE: As an application grows I would consider adding some sort of global state management system like Redux. Something I have experience with.
+
 ### Why SQLite3?
 
 Chose SQLite3 (via better-sqlite3) because it's:
